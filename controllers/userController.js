@@ -1,7 +1,7 @@
 const { User, Thought } = require("../models");
 
 const userController = {
-  async getAllUser(req, res) {
+  async getAllUsers(req, res) {
     try {
       const dbUserData = await User.find({})
         .populate({
@@ -33,7 +33,7 @@ const userController = {
         .select("-__v");
 
       if (!dbUserData) {
-        return res.status(404).json({ message: "No user found with this id!" });
+        return res.status(404).json({ message: "This user was not found" });
       }
       res.json(dbUserData);
     } catch (err) {
@@ -61,7 +61,7 @@ const userController = {
       });
 
       if (!dbUserData) {
-        res.status(404).json({ message: "No user found with this id!" });
+        res.status(404).json({ message: "This user was not found" });
         return;
       }
 
@@ -75,11 +75,11 @@ const userController = {
     try {
       const dbUserData = await User.findOneAndDelete({ _id: params.id });
       if (!dbUserData) {
-        return res.status(404).json({ message: "No user with this id!" });
+        return res.status(404).json({ message: "This user was not found" });
       }
 
       await Thought.deleteMany({ _id: { $in: dbUserData.thoughts } });
-      res.json({ message: "User and associated thoughts deleted!" });
+      res.json({ message: "User and thoughts deleted!" });
     } catch (err) {
       res.json(err);
     }
@@ -94,7 +94,7 @@ const userController = {
       );
 
       if (!dbUserData) {
-        return res.status(404).json({ message: "No user with this id" });
+        return res.status(404).json({ message: "This user was not found" });
       }
 
       res.json(dbUserData);
@@ -112,7 +112,7 @@ const userController = {
       );
 
       if (!dbUserData) {
-        throw new Error("No user with this id!");
+        throw new Error("This user was not found");
       }
 
       res.json(dbUserData);

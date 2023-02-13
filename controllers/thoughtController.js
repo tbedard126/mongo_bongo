@@ -2,7 +2,7 @@ const { Thought, User } = require("../models");
 
 const thoughtController = {
   // get all Thoughts
-  async getAllThought(req, res) {
+  async getAllThoughts(req, res) {
     try {
       const dbThoughtData = await Thought.find({})
         .populate({
@@ -29,7 +29,7 @@ const thoughtController = {
         })
         .select("-__v");
       if (!dbThoughtData) {
-        return res.status(404).json({ message: "No thought with this id!" });
+        return res.status(404).json({ message: "did not find that thought" });
       }
       res.json(dbThoughtData);
     } catch (err) {
@@ -53,10 +53,10 @@ const thoughtController = {
       if (!dbUserData) {
         return res
           .status(404)
-          .json({ message: "Thought created but no user with this id!" });
+          .json({ message: "Thought created but no user found" });
       }
 
-      res.json({ message: "Thought successfully created!" });
+      res.json({ message: "Thought successfully created" });
     } catch (err) {
       res.json(err);
     }
@@ -75,7 +75,7 @@ const thoughtController = {
       );
 
       if (!dbThoughtData) {
-        res.status(404).json({ message: "No thought found with this id!" });
+        res.status(404).json({ message: "No thought found" });
         return;
       }
 
@@ -90,7 +90,7 @@ const thoughtController = {
     try {
       const dbThoughtData = await Thought.findOneAndDelete({ _id: params.id });
       if (!dbThoughtData) {
-        return res.status(404).json({ message: "No thought with this id!" });
+        return res.status(404).json({ message: "This thought was not found" });
       }
 
       const dbUserData = await User.findOneAndUpdate(
@@ -101,9 +101,9 @@ const thoughtController = {
       if (!dbUserData) {
         return res
           .status(404)
-          .json({ message: "Thought created but no user with this id!" });
+          .json({ message: "Thought created but no user found" });
       }
-      res.json({ message: "Thought successfully deleted!" });
+      res.json({ message: "Thought successfully deleted" });
     } catch (err) {
       res.json(err);
     }
@@ -119,7 +119,7 @@ const thoughtController = {
       );
 
       if (!dbThoughtData) {
-        res.status(404).json({ message: "No thought with this id" });
+        res.status(404).json({ message: "No thought found" });
         return;
       }
       res.json(dbThoughtData);
