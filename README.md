@@ -18,6 +18,8 @@ This is a NoSQL database API for a social networking site
 
 ![](./images/MONGOBONGO.png)
 
+[Video](https://drive.google.com/file/d/1PTqDAkQ4qN-wz3CQ3BjgmEdr3fN-8V_E/view)
+
 ## Installation:
 
 To install this application you must have MongoDB installed on your local machine. After that is done just clone the repo, cd into the file, then open up a terminal inside the file and type in npm i. This will get you all of the dependancies needed to run the file. After that is done in the terminal type node server.js and this will start the application.
@@ -40,7 +42,6 @@ Email: tylerbedard126@gmail.com
 
 GitHub:
 [tbedard126](https://github.com/tbedard126)
-[Video](https://drive.google.com/file/d/1PTqDAkQ4qN-wz3CQ3BjgmEdr3fN-8V_E/view)
 
 Email is the best way to contact me.
 
